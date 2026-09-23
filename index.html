@@ -1132,7 +1132,7 @@
       </div>
 
       <div class="footer-note">
-        <div class="footer-note-main">Thank you for choosing Brother Communication ❤️</div>
+        <div class="footer-note-main">Thank you for choosing <span class="shop-name-disp">Brother Communication</span> ❤️</div>
         <div class="footer-note-sub">Seva • Sahulat • Sabke Liye</div>
       </div>
     </div>
@@ -1772,12 +1772,15 @@
       const rounded = Math.round(currentAmount);
       let text = "";
 
+      // Use dynamically configured center name from SHOP_CONFIG (updated via config.json or HTML config)
+      const shopDisplayName = (typeof SHOP_CONFIG !== "undefined" && SHOP_CONFIG.name && SHOP_CONFIG.name.trim()) ? SHOP_CONFIG.name.trim() : "Brother Communication";
+
       if (currentLanguage === "hi") {
-        text = "नमस्ते " + currentCustomerName + " जी। सीएससी सेंटर जंडवाला मीरा सांगला का कुल भुगतान " + rounded + " रुपये है। आपका पेमेंट क्यूआर कोड फोन की गैलरी में स्वतः डाउनलोड हो गया है। आप सीधे गूगल पे, फोनपे या पेटीएम ऐप खोल सकते हैं, अथवा स्कैनर में गैलरी से क्यूआर सिलेक्ट करके अपना यूपीआई पिन डालकर भुगतान पूरा करें। धन्यवाद।";
+        text = "नमस्ते " + currentCustomerName + " जी। " + shopDisplayName + " का कुल भुगतान " + rounded + " रुपये है। आपका पेमेंट क्यूआर कोड फोन की गैलरी में स्वतः डाउनलोड हो गया है। आप सीधे गूगल पे, फोनपे या पेटीएम ऐप खोल सकते हैं, अथवा स्कैनर में गैलरी से क्यूआर सिलेक्ट करके अपना यूपीआई पिन डालकर भुगतान पूरा करें। धन्यवाद।";
       } else if (currentLanguage === "pa") {
-        text = "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ " + currentCustomerName + " ਜੀ। ਸੀਐਸਸੀ ਸੈਂਟਰ ਜੰਡਵਾਲਾ ਮੀਰਾ ਸਾਂਗਲਾ ਦਾ ਕੁੱਲ ਭੁਗਤਾਨ " + rounded + " ਰੁਪਏ ਹੈ। ਤੁਹਾਡਾ ਭੁਗਤਾਨ QR ਕੋਡ ਫ਼ੋਨ ਦੀ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ ਹੈ। ਆਪਣਾ ਯੂਪੀਆਈ ਪਿੰਨ ਦਰਜ ਕਰਕੇ ਭੁਗਤਾਨ ਪੂਰਾ ਕਰੋ। ਧੰਨਵਾਦ।";
+        text = "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ " + currentCustomerName + " ਜੀ। " + shopDisplayName + " ਦਾ ਕੁੱਲ ਭੁਗਤਾਨ " + rounded + " ਰੁਪਏ ਹੈ। ਤੁਹਾਡਾ ਭੁਗਤਾਨ QR ਕੋਡ ਫ਼ੋਨ ਦੀ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ ਹੈ। ਆਪਣਾ ਯੂਪੀਆਈ ਪਿੰਨ ਦਰਜ ਕਰਕੇ ਭੁਗਤਾਨ ਪੂਰਾ ਕਰੋ। ਧੰਨਵਾਦ।";
       } else {
-        text = "Hello " + currentCustomerName + ". Your payment of rupees " + rounded + " for CSC Centre Jandwala Mira Sangla is ready. The QR code has been saved to your photo gallery. Tap your preferred UPI app or scan the QR code to complete payment. Thank you.";
+        text = "Hello " + currentCustomerName + ". Your payment of rupees " + rounded + " for " + shopDisplayName + " is ready. The QR code has been saved to your photo gallery. Tap your preferred UPI app or scan the QR code to complete payment. Thank you.";
       }
 
       const utterance = new SpeechSynthesisUtterance(text);
