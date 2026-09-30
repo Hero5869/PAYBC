@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Brother Communication</title>
   <meta name="description" content="Official Payment Portal & Gateway for Brother Communication" />
 
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -15,15 +15,12 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
+    html {
       width: 100%;
-      max-width: 100vw;
+      max-width: 100%;
       overflow-x: hidden !important;
-      touch-action: pan-y;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
-      overscroll-behavior-x: none;
-      -webkit-overflow-scrolling: touch;
     }
 
     body {
@@ -31,11 +28,22 @@
       color: #0f172a;
       min-height: 100vh;
       min-height: 100dvh;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden !important;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 12px 10px 28px 10px;
+      padding: 10px 8px 32px 8px;
+      overscroll-behavior-x: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    @media (min-width: 640px) {
+      body {
+        padding: 16px 14px 40px 14px;
+      }
     }
 
     /* BLANK ROOT STATE (When no hash/data is provided) */
@@ -47,38 +55,48 @@
       text-align: center;
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      padding: 40px 24px;
+      border-radius: 20px;
+      padding: 30px 16px;
       box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      #blank-view {
+        border-radius: 24px;
+        padding: 40px 24px;
+      }
     }
 
     .blank-icon {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       background: #eff6ff;
       color: #1d4ed8;
       border: 1px solid #bfdbfe;
-      border-radius: 16px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 18px;
-      margin: 0 auto 16px auto;
+      font-size: 16px;
+      margin: 0 auto 14px auto;
     }
 
     .blank-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: #0f172a;
       letter-spacing: -0.02em;
       margin-bottom: 6px;
+      word-break: break-word;
     }
 
     .blank-subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: #64748b;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .blank-phone-btn {
@@ -87,15 +105,16 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 14px 18px;
+      padding: 13px 16px;
       background: #0f172a;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      border-radius: 14px;
+      border-radius: 12px;
       text-decoration: none;
       transition: all 0.15s ease;
       margin-bottom: 10px;
+      box-sizing: border-box;
     }
 
     .blank-wa-btn {
@@ -104,14 +123,15 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 14px 18px;
+      padding: 13px 16px;
       background: #f1f5f9;
       color: #334155;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      border-radius: 14px;
+      border-radius: 12px;
       text-decoration: none;
       transition: all 0.15s ease;
+      box-sizing: border-box;
     }
 
     /* CONTAINER */
@@ -121,45 +141,42 @@
       margin: 0 auto;
       box-sizing: border-box;
       overflow-x: hidden;
+      padding: 0;
     }
 
-    /* HEADER BRANDING (Exact as in reference image) */
+    /* HEADER BRANDING */
     .brand-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 8px;
-      margin-bottom: 14px;
+      gap: 8px;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
       width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
     }
 
+    .brand-header-info {
+      flex: 1;
+      min-width: 0;
+    }
+
     .brand-header h1 {
-      font-size: clamp(18px, 5.2vw, 28px);
+      font-size: clamp(16px, 4.6vw, 26px);
       font-weight: 900;
       color: #0f172a;
       letter-spacing: -0.03em;
-      line-height: 1.08;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .brand-header h2 {
-      font-size: clamp(14px, 3.8vw, 20px);
-      font-weight: 900;
-      color: #0f172a;
-      letter-spacing: -0.02em;
-      margin-top: 2px;
+      line-height: 1.15;
       word-break: break-word;
       overflow-wrap: break-word;
     }
 
     .brand-header p {
-      font-size: clamp(10px, 2.8vw, 12px);
+      font-size: clamp(10px, 2.7vw, 12px);
       color: #64748b;
       font-weight: 500;
-      margin-top: 4px;
+      margin-top: 3px;
       word-break: break-word;
       overflow-wrap: break-word;
     }
@@ -167,23 +184,24 @@
     .script-badge {
       text-align: right;
       flex-shrink: 0;
+      max-width: 40%;
     }
 
     .script-badge-text {
       font-family: Georgia, serif;
       font-style: italic;
       font-weight: 700;
-      font-size: clamp(15px, 4vw, 20px);
+      font-size: clamp(13px, 3.6vw, 19px);
       color: #1e3a8a;
       line-height: 1.15;
       position: relative;
       display: inline-block;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
     }
 
     .script-badge-underline {
       width: 100%;
-      height: 5px;
+      height: 4px;
       background: #fbbf24;
       border-radius: 9999px;
       margin-top: 2px;
@@ -195,15 +213,26 @@
       width: 100%;
       max-width: 540px;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .checkout-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      padding: 28px 24px;
+      border-radius: 20px;
+      padding: 18px 14px;
       box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .checkout-card {
+        border-radius: 24px;
+        padding: 26px 22px;
+      }
     }
 
     .checkout-card-header {
@@ -211,8 +240,9 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #f1f5f9;
-      padding-bottom: 16px;
-      margin-bottom: 20px;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 8px;
     }
 
     .checkout-tag {
@@ -224,7 +254,7 @@
     }
 
     .checkout-title {
-      font-size: 18px;
+      font-size: clamp(15px, 4.2vw, 18px);
       font-weight: 900;
       color: #0f172a;
       margin-top: 2px;
@@ -233,22 +263,25 @@
     .verified-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
+      gap: 4px;
+      padding: 3px 8px;
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
       border-radius: 9999px;
       font-size: 11px;
       font-weight: 700;
       color: #047857;
+      flex-shrink: 0;
     }
 
     .summary-box {
       background: #f8fafc;
       border: 1px solid #f1f5f9;
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 22px;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 18px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .summary-row {
@@ -256,7 +289,8 @@
       align-items: center;
       justify-content: space-between;
       font-size: 13px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      gap: 8px;
     }
 
     .summary-row:last-child {
@@ -266,28 +300,32 @@
     .summary-label {
       color: #64748b;
       font-weight: 500;
+      flex-shrink: 0;
     }
 
     .summary-val {
       font-weight: 700;
       color: #0f172a;
       text-align: right;
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .summary-divider {
       height: 1px;
       background: #e2e8f0;
-      margin: 14px 0;
+      margin: 12px 0;
     }
 
     .summary-amount-label {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: #334155;
     }
 
     .summary-amount-val {
-      font-size: 32px;
+      font-size: clamp(24px, 7vw, 32px);
       font-weight: 900;
       color: #2563eb;
       letter-spacing: -0.02em;
@@ -299,16 +337,17 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 16px 20px;
+      padding: 14px 18px;
       background: #2563eb;
       color: #ffffff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      border-radius: 16px;
+      border-radius: 14px;
       border: none;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
       transition: all 0.15s ease;
+      box-sizing: border-box;
     }
 
     .proceed-btn:hover {
@@ -320,29 +359,33 @@
       font-size: 11px;
       color: #94a3b8;
       font-weight: 500;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    /* PAGE 2: GATEWAY SCREEN (Exact Reference Design) */
+    /* PAGE 2: GATEWAY SCREEN */
     #payment-view {
       display: none;
       width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .top-controls {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 14px;
+      gap: 6px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .back-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
+      gap: 5px;
+      padding: 6px 10px;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 10px;
@@ -356,8 +399,8 @@
     .audio-btn {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
+      gap: 5px;
+      padding: 6px 10px;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 10px;
@@ -383,11 +426,11 @@
     }
 
     .lang-choice {
-      padding: 4px 8px;
+      padding: 3px 6px;
       border: none;
       background: transparent;
       border-radius: 7px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: #64748b;
       cursor: pointer;
@@ -403,70 +446,90 @@
       display: none;
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size: 12px;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 11px;
       font-weight: 600;
       color: #065f46;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      word-break: break-word;
     }
 
     /* COMPLETE PAYMENT CARD */
     .complete-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      padding: 24px;
+      border-radius: 20px;
+      padding: 16px 12px;
       box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .complete-card {
+        border-radius: 24px;
+        padding: 20px;
+      }
     }
 
     @media (min-width: 768px) {
       .complete-card {
         grid-template-columns: 1.5fr 1fr;
         align-items: center;
+        padding: 24px;
       }
     }
 
     .complete-title {
-      font-size: 24px;
+      font-size: clamp(18px, 5vw, 24px);
       font-weight: 900;
       color: #0f172a;
       letter-spacing: -0.02em;
     }
 
     .complete-sub {
-      font-size: 13px;
+      font-size: 12px;
       color: #64748b;
       font-weight: 500;
       margin-top: 2px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .pill-table {
       background: #f8fafc;
       border: 1px solid #f1f5f9;
-      border-radius: 16px;
-      padding: 14px 16px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .pill-row {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 8px;
-      font-size: 13px;
+      font-size: 12px;
+      gap: 6px;
+      width: 100%;
     }
 
     .pill-row:last-child {
       margin-bottom: 0;
       align-items: baseline;
-      padding-top: 4px;
+      padding-top: 3px;
     }
 
     .pill-label {
-      width: 90px;
+      width: 75px;
+      min-width: 65px;
       color: #64748b;
       font-weight: 500;
       flex-shrink: 0;
@@ -476,18 +539,24 @@
       font-weight: 700;
       color: #0f172a;
       flex: 1;
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      text-align: right;
     }
 
     .pill-amount-val {
-      font-size: 30px;
+      font-size: clamp(24px, 6.8vw, 32px);
       font-weight: 900;
       color: #2563eb;
       letter-spacing: -0.02em;
+      line-height: 1;
     }
 
     .powered-by-col {
       border-top: 1px solid #f1f5f9;
-      padding-top: 16px;
+      padding-top: 14px;
+      min-width: 0;
     }
 
     @media (min-width: 768px) {
@@ -507,36 +576,36 @@
     }
 
     .upi-logo-img {
-      height: 32px;
+      height: 28px;
       object-fit: contain;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .feature-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .feature-item {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: #334155;
     }
 
     .feature-icon-circle {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: #eff6ff;
       color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10px;
       flex-shrink: 0;
     }
 
@@ -544,9 +613,12 @@
     .middle-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 14px;
+      margin-bottom: 14px;
       position: relative;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     @media (min-width: 768px) {
@@ -559,16 +631,28 @@
     .middle-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      padding: 22px;
+      border-radius: 20px;
+      padding: 16px 12px;
       box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .middle-card {
+        border-radius: 24px;
+        padding: 20px;
+      }
     }
 
     .middle-card-title {
-      font-size: 20px;
+      font-size: clamp(17px, 4.5vw, 20px);
       font-weight: 900;
       color: #0f172a;
       letter-spacing: -0.02em;
@@ -578,7 +662,7 @@
       font-size: 12px;
       color: #64748b;
       margin-top: 2px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     /* QR Code Display */
@@ -587,24 +671,48 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 8px 0;
+      padding: 4px 0;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .qr-frame {
       position: relative;
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      display: inline-block;
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(180px, 48vw, calc(100% - 16px));
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .qr-frame {
+        width: 190px;
+      }
     }
 
     #qr-canvas {
-      display: block;
-      width: 170px;
-      height: 170px;
-      border-radius: 12px;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      border-radius: 10px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .qr-center-logo {
@@ -612,16 +720,17 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 36px;
-      height: 36px;
+      width: clamp(26px, 7vw, 32px);
+      height: clamp(26px, 7vw, 32px);
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 3px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: none;
     }
 
     .qr-center-logo img {
@@ -636,16 +745,17 @@
       justify-content: center;
       gap: 6px;
       width: 100%;
-      padding: 11px 16px;
+      padding: 10px 14px;
       background: #eff6ff;
       border: 1px solid #bfdbfe;
       border-radius: 12px;
       color: #2563eb;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
       margin-top: 10px;
+      box-sizing: border-box;
     }
 
     .download-qr-btn:hover {
@@ -657,12 +767,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px 0;
+      padding: 2px 0;
     }
 
     .or-circle {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -670,7 +780,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       color: #64748b;
       text-transform: uppercase;
@@ -680,16 +790,23 @@
     .app-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 10px;
       width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
+    }
+
+    @media (min-width: 640px) {
+      .app-grid {
+        gap: 8px;
+      }
     }
 
     .app-box {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 8px 2px;
       display: flex;
       flex-direction: column;
@@ -701,6 +818,14 @@
       transition: all 0.15s ease;
       min-width: 0;
       box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .app-box {
+        border-radius: 14px;
+        padding: 10px 4px;
+      }
     }
 
     .app-box:hover {
@@ -710,14 +835,14 @@
     }
 
     .app-box-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: clamp(28px, 8vw, 36px);
+      height: clamp(28px, 8vw, 36px);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .app-box-icon img {
@@ -727,7 +852,7 @@
     }
 
     .app-box-title {
-      font-size: 10px;
+      font-size: clamp(9px, 2.4vw, 11px);
       font-weight: 700;
       color: #334155;
       line-height: 1.1;
@@ -735,8 +860,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100%;
-      padding: 0 2px;
+      padding: 0 1px;
       box-sizing: border-box;
+      text-align: center;
     }
 
     .choose-any-btn {
@@ -744,13 +870,14 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      padding: 12px 14px;
+      padding: 10px 12px;
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 14px;
+      border-radius: 12px;
       cursor: pointer;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       transition: all 0.15s ease;
+      box-sizing: border-box;
     }
 
     .choose-any-btn:hover {
@@ -761,25 +888,30 @@
     .choose-any-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
     }
 
     .grid-icon-box {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
       background: #f1f5f9;
       color: #334155;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
+      flex-shrink: 0;
     }
 
     .choose-any-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .note-callout {
@@ -789,10 +921,11 @@
       background: #eff6ff;
       border: 1px solid #dbeafe;
       border-radius: 12px;
-      padding: 10px 12px;
+      padding: 8px 10px;
       font-size: 11px;
       color: #1e40af;
-      line-height: 1.4;
+      line-height: 1.35;
+      box-sizing: border-box;
     }
 
     .note-callout strong {
@@ -803,41 +936,53 @@
     .offer-container {
       background: #ecfdf5;
       border: 1px solid #a7f3d0;
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 16px;
+      border-radius: 20px;
+      padding: 14px 12px;
+      margin-bottom: 14px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    @media (min-width: 640px) {
+      .offer-container {
+        border-radius: 24px;
+        padding: 20px;
+      }
     }
 
     .offer-header {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 14px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
     .offer-check-badge {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: #059669;
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       flex-shrink: 0;
       margin-top: 1px;
     }
 
     .offer-headline {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       color: #0f172a;
+      line-height: 1.25;
     }
 
     .offer-subline {
-      font-size: 12px;
+      font-size: 11px;
       color: #475569;
       margin-top: 2px;
     }
@@ -845,39 +990,49 @@
     .offer-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @media (min-width: 640px) {
       .offer-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
       }
     }
 
     .offer-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 16px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .offer-card-top {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .offer-card-top > div:last-child {
+      min-width: 0;
     }
 
     .offer-card-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       border: 1px solid #f1f5f9;
-      padding: 4px;
+      padding: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -892,16 +1047,17 @@
     }
 
     .offer-card-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.2;
     }
 
     .offer-card-desc {
-      font-size: 12px;
+      font-size: 11px;
       color: #64748b;
       margin-top: 2px;
+      line-height: 1.3;
     }
 
     .check-offer-btn {
@@ -910,13 +1066,14 @@
       justify-content: center;
       gap: 6px;
       width: 100%;
-      padding: 10px 14px;
-      font-size: 12px;
+      padding: 9px 12px;
+      font-size: 11px;
       font-weight: 700;
-      border-radius: 12px;
+      border-radius: 10px;
       color: #ffffff;
       text-decoration: none;
       transition: all 0.15s ease;
+      box-sizing: border-box;
     }
 
     .btn-phonepe-purple {
@@ -946,56 +1103,76 @@
     /* FOOTER TRUST BADGES */
     .trust-badge-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     @media (min-width: 640px) {
       .trust-badge-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 20px;
       }
     }
 
     .trust-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 10px 8px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      min-width: 0;
+      overflow: hidden;
+      box-sizing: border-box;
     }
 
     .trust-card-icon {
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: #eff6ff;
       color: #2563eb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
       flex-shrink: 0;
     }
 
+    .trust-card > div:last-child {
+      min-width: 0;
+      overflow: hidden;
+    }
+
     .trust-card-title {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: #0f172a;
       line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .trust-card-sub {
-      font-size: 10px;
+      font-size: 9px;
       color: #94a3b8;
       margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .footer-note {
       text-align: center;
       padding-top: 4px;
+      width: 100%;
     }
 
     .footer-note-main {
@@ -1005,7 +1182,7 @@
     }
 
     .footer-note-sub {
-      font-size: 11px;
+      font-size: 10px;
       color: #94a3b8;
       margin-top: 2px;
     }
@@ -1039,7 +1216,7 @@
     <div id="checkout-view">
       <!-- Brand Header -->
       <div class="brand-header">
-        <div>
+        <div class="brand-header-info">
           <h1 class="shop-name-disp" style="text-transform: uppercase;">Brother Communication</h1>
           <p>Digital Services | Documents | Insurance | Travel | More</p>
         </div>
@@ -1160,12 +1337,12 @@
 
       <!-- Toast download banner -->
       <div id="toast-notify" class="toast-banner">
-        ✓ QR Code downloaded to your phone gallery! Open your payment app scanner to upload.
+        ✓ QR Code downloaded to your phone gallery! Click below to open your app, then click on choose the QR code from the gallery to pay.
       </div>
 
       <!-- Brand Header -->
       <div class="brand-header">
-        <div>
+        <div class="brand-header-info">
           <h1 class="shop-name-disp" style="text-transform: uppercase;">Brother Communication</h1>
           <p>Digital Services | Documents | Insurance | Travel | More</p>
         </div>
@@ -1302,7 +1479,7 @@
           <!-- Note Callout -->
           <div class="note-callout">
             <span style="font-size: 14px;">ℹ️</span>
-            <div><strong>Note:</strong> Tapping directly opens Google Pay, PhonePe, Paytm, or BHIM on your smartphone to complete the payment.</div>
+            <div><strong>How to Pay:</strong> Click below to open Google Pay, PhonePe, or Paytm, and then click on <strong>choose the QR code from the gallery</strong> in the app scanner to pay.</div>
           </div>
         </div>
       </div>
@@ -1447,17 +1624,7 @@
               const note = encodeURIComponent("Payment by " + currentCustomerName);
               const pn = encodeURIComponent(SHOP_CONFIG.name);
               currentUpiUri = "upi://pay?pa=" + SHOP_CONFIG.upiId + "&pn=" + pn + "&am=" + currentAmount.toFixed(2) + "&cu=INR&tn=" + note;
-              const canvas = document.getElementById("qr-canvas");
-              if (window.QRCode && window.QRCode.toCanvas) {
-                window.QRCode.toCanvas(canvas, currentUpiUri, {
-                  width: 360,
-                  margin: 1,
-                  errorCorrectionLevel: "H",
-                  color: { dark: "#0f172a", light: "#ffffff" }
-                }, function(err) {
-                  if (err) console.error("QR render error:", err);
-                });
-              }
+              renderQrCode();
             }
           }
         })
@@ -1472,24 +1639,51 @@
     let hasAutoDownloaded = false;
     let hasAutoPlayedAudio = false;
 
+    // Crisp & fully mobile-responsive QR code renderer
+    function renderQrCode() {
+      const canvas = document.getElementById("qr-canvas");
+      if (!canvas || !window.QRCode || !window.QRCode.toCanvas || !currentUpiUri) return;
+
+      window.QRCode.toCanvas(canvas, currentUpiUri, {
+        width: 320,
+        margin: 1,
+        errorCorrectionLevel: "H",
+        color: { dark: "#0f172a", light: "#ffffff" }
+      }, function(err) {
+        if (err) {
+          console.error("QR render error:", err);
+          return;
+        }
+        // Remove fixed inline pixel dimensions so QR canvas shrinks dynamically to fit within mobile screen
+        canvas.style.removeProperty("width");
+        canvas.style.removeProperty("height");
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.maxWidth = "100%";
+        canvas.style.maxHeight = "100%";
+        canvas.style.objectFit = "contain";
+        canvas.style.aspectRatio = "1 / 1";
+      });
+    }
+
     const DICT = {
       en: {
         audioGuide: "Audio Guide",
         stopAudio: "Stop Voice",
         saveQr: "Download QR Code",
-        qrDownloaded: "QR Code downloaded to your phone gallery!"
+        qrDownloaded: "QR Code downloaded to your phone gallery! Click below to open the app, then click on choose the QR code from the gallery to pay."
       },
       hi: {
         audioGuide: "ऑडियो निर्देश",
         stopAudio: "आवाज़ बंद करें",
         saveQr: "QR कोड डाउनलोड करें",
-        qrDownloaded: "QR कोड गैलरी में सेव हो गया!"
+        qrDownloaded: "QR कोड फोन की गैलरी में सेव हो गया! नीचे ऐप खोलें और फिर स्कैनर में गैलरी से QR कोड चुनकर भुगतान करें।"
       },
       pa: {
         audioGuide: "ਆਡੀਓ ਗਾਈਡ",
         stopAudio: "ਆਵਾਜ਼ ਬੰਦ ਕਰੋ",
         saveQr: "QR ਕੋਡ ਡਾਊਨਲੋਡ ਕਰੋ",
-        qrDownloaded: "QR ਕੋਡ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ!"
+        qrDownloaded: "QR ਕੋਡ ਫ਼ੋਨ ਦੀ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ! ਹੇਠਾਂ ਐਪ ਖੋਲ੍ਹੋ ਅਤੇ ਫਿਰ ਸਕੈਨਰ ਵਿੱਚ ਗੈਲਰੀ ਵਿੱਚੋਂ QR ਕੋਡ ਚੁਣ ਕੇ ਭੁਗਤਾਨ ਕਰੋ।"
       }
     };
 
@@ -1497,26 +1691,39 @@
       let rawName = "";
       let parsedAmount = 0;
 
-      // 1. Hash format (#1000-Rahul_Singh or #10-Rahul)
+      // 1. Hash format (#10-HARMAN_DEEP, #-10-HARMAN_DEEP, or legacy query in hash)
       let rawHash = (window.location.hash || "").trim();
-      if (rawHash.startsWith("#/")) rawHash = rawHash.slice(2);
-      else if (rawHash.startsWith("#")) rawHash = rawHash.slice(1);
-      rawHash = rawHash.trim();
+      rawHash = rawHash.replace(/^#[/-]*/, "").trim();
 
       if (rawHash) {
-        const cleanHash = decodeURIComponent(rawHash).trim();
-        const sepIndex = cleanHash.indexOf("-") !== -1 ? cleanHash.indexOf("-") : cleanHash.indexOf("_");
-        if (sepIndex !== -1) {
-          const p1 = cleanHash.substring(0, sepIndex).trim();
-          const p2 = cleanHash.substring(sepIndex + 1).trim();
-          const num1 = parseFloat(p1);
-          const num2 = parseFloat(p2);
-          if (!isNaN(num1) && num1 > 0 && p2) {
-            parsedAmount = num1;
-            rawName = p2;
-          } else if (!isNaN(num2) && num2 > 0 && p1) {
-            parsedAmount = num2;
-            rawName = p1;
+        // Support hash with query format if present e.g. amount=10&name=HARMAN_DEEP
+        if (rawHash.indexOf("amount=") !== -1 || rawHash.indexOf("name=") !== -1 || rawHash.indexOf("a=") !== -1) {
+          try {
+            const qIdx = rawHash.indexOf("?") !== -1 ? rawHash.indexOf("?") : 0;
+            const searchStr = rawHash.substring(qIdx).replace(/^[?#]/, "");
+            const p = new URLSearchParams(searchStr);
+            const a = p.get("a") || p.get("amount");
+            const n = p.get("n") || p.get("name");
+            if (a && !isNaN(parseFloat(a))) parsedAmount = parseFloat(a);
+            if (n) rawName = n;
+          } catch(e) {}
+        }
+
+        if (!parsedAmount) {
+          const cleanHash = decodeURIComponent(rawHash).trim();
+          const sepIndex = cleanHash.indexOf("-") !== -1 ? cleanHash.indexOf("-") : cleanHash.indexOf("_");
+          if (sepIndex !== -1) {
+            const p1 = cleanHash.substring(0, sepIndex).trim();
+            const p2 = cleanHash.substring(sepIndex + 1).trim();
+            const num1 = parseFloat(p1);
+            const num2 = parseFloat(p2);
+            if (!isNaN(num1) && num1 > 0 && p2) {
+              parsedAmount = num1;
+              rawName = p2;
+            } else if (!isNaN(num2) && num2 > 0 && p1) {
+              parsedAmount = num2;
+              rawName = p1;
+            }
           }
         }
       }
@@ -1571,6 +1778,9 @@
       document.getElementById("checkout-view").style.display = "none";
       document.getElementById("payment-view").style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Ensure QR code is crisply rendered and dynamically fitted to mobile screen dimensions
+      renderQrCode();
 
       // Automatically download QR code once ready
       if (!hasAutoDownloaded) {
@@ -1630,17 +1840,7 @@
       currentUpiUri = "upi://pay?pa=" + SHOP_CONFIG.upiId + "&pn=" + pn + "&am=" + currentAmount.toFixed(2) + "&cu=INR&tn=" + note;
 
       // Render crisp QR Code on canvas
-      const canvas = document.getElementById("qr-canvas");
-      if (window.QRCode && window.QRCode.toCanvas) {
-        window.QRCode.toCanvas(canvas, currentUpiUri, {
-          width: 360,
-          margin: 1,
-          errorCorrectionLevel: "H",
-          color: { dark: "#0f172a", light: "#ffffff" }
-        }, function(err) {
-          if (err) console.error("QR render error:", err);
-        });
-      }
+      renderQrCode();
 
       setLanguage("hi");
 
@@ -1757,8 +1957,10 @@
 
         const toast = document.getElementById("toast-notify");
         if (toast) {
+          const t = DICT[currentLanguage] || DICT.en;
+          toast.textContent = "✓ " + t.qrDownloaded;
           toast.style.display = "block";
-          setTimeout(function() { toast.style.display = "none"; }, 5000);
+          setTimeout(function() { toast.style.display = "none"; }, 6000);
         }
       } catch(e) {
         console.error("Save QR error:", e);
@@ -1776,11 +1978,11 @@
       const shopDisplayName = (typeof SHOP_CONFIG !== "undefined" && SHOP_CONFIG.name && SHOP_CONFIG.name.trim()) ? SHOP_CONFIG.name.trim() : "Brother Communication";
 
       if (currentLanguage === "hi") {
-        text = "नमस्ते " + currentCustomerName + " जी। " + shopDisplayName + " का कुल भुगतान " + rounded + " रुपये है। आपका पेमेंट क्यूआर कोड फोन की गैलरी में स्वतः डाउनलोड हो गया है। आप सीधे गूगल पे, फोनपे या पेटीएम ऐप खोल सकते हैं, अथवा स्कैनर में गैलरी से क्यूआर सिलेक्ट करके अपना यूपीआई पिन डालकर भुगतान पूरा करें। धन्यवाद।";
+        text = "नमस्ते " + currentCustomerName + " जी। " + shopDisplayName + " का कुल भुगतान " + rounded + " रुपये है। आपका पेमेंट क्यूआर कोड फोन की गैलरी में सेव हो गया है। कृपया भुगतान करने के लिए नीचे क्लिक करके ऐप खोलें, और फिर स्कैनर में गैलरी से क्यूआर कोड चुनकर अपना यूपीआई पिन डालकर भुगतान करें। धन्यवाद।";
       } else if (currentLanguage === "pa") {
-        text = "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ " + currentCustomerName + " ਜੀ। " + shopDisplayName + " ਦਾ ਕੁੱਲ ਭੁਗਤਾਨ " + rounded + " ਰੁਪਏ ਹੈ। ਤੁਹਾਡਾ ਭੁਗਤਾਨ QR ਕੋਡ ਫ਼ੋਨ ਦੀ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ ਹੈ। ਆਪਣਾ ਯੂਪੀਆਈ ਪਿੰਨ ਦਰਜ ਕਰਕੇ ਭੁਗਤਾਨ ਪੂਰਾ ਕਰੋ। ਧੰਨਵਾਦ।";
+        text = "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ " + currentCustomerName + " ਜੀ। " + shopDisplayName + " ਦਾ ਕੁੱਲ ਭੁਗਤਾਨ " + rounded + " ਰੁਪਏ ਹੈ। ਤੁਹਾਡਾ ਪੇਮੈਂਟ QR ਕੋਡ ਫ਼ੋਨ ਦੀ ਗੈਲਰੀ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ ਹੈ। ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਕਲਿੱਕ ਕਰਕੇ ਐਪ ਖੋਲ੍ਹੋ, ਅਤੇ ਫਿਰ ਸਕੈਨਰ ਵਿੱਚ ਗੈਲਰੀ ਵਿੱਚੋਂ QR ਕੋਡ ਚੁਣ ਕੇ ਆਪਣਾ UPI ਪਿੰਨ ਦਰਜ ਕਰਕੇ ਭੁਗਤਾਨ ਕਰੋ। ਧੰਨਵਾਦ।";
       } else {
-        text = "Hello " + currentCustomerName + ". Your payment of rupees " + rounded + " for " + shopDisplayName + " is ready. The QR code has been saved to your photo gallery. Tap your preferred UPI app or scan the QR code to complete payment. Thank you.";
+        text = "Hello " + currentCustomerName + ". Your total payment for " + shopDisplayName + " is rupees " + rounded + ". Your payment QR code has been saved to your phone gallery. Click below to open the app, and then click on choose the QR code from the gallery to pay. Thank you.";
       }
 
       const utterance = new SpeechSynthesisUtterance(text);
